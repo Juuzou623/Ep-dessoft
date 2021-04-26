@@ -60,7 +60,6 @@ def lista_movimentos_possiveis(cartas, indice):
     if extrai_naipe(cartas[indice-1]) in cartas[indice] or extrai_valor(cartas[indice-1]) in cartas[indice]:
         mov_possi.append(1)
 
-
     if indice > 2:
         if extrai_naipe(cartas[indice-3]) in cartas[indice] or extrai_valor(cartas[indice-3]) in cartas[indice]:
             mov_possi.append(3)
@@ -71,3 +70,11 @@ def empilha(cartas, origem, destino):
     cartas[destino] = cartas[origem]
     cartas.pop(origem)
     return cartas
+
+def possui_movimentos_possiveis(baralho):
+    i = 0
+    while i < len(baralho):
+        if lista_movimentos_possiveis(baralho, i) != []:
+            return True
+        i += 1
+    return False

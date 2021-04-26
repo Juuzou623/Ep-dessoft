@@ -66,3 +66,8 @@ def lista_movimentos_possiveis(cartas, indice):
             mov_possi.append(3)
 
     return mov_possi
+
+def empilha(cartas, origem, destino):
+    cartas[destino] = cartas[origem]
+    cartas.pop(origem)
+    return cartas

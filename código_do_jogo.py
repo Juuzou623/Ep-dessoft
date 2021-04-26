@@ -1,5 +1,5 @@
 import funções
-
+import random
 print('Paciência Acordeão')
 print('\n==================')
 
@@ -20,3 +20,9 @@ print('\nDesde que alguma das condições acima seja satisfeita, qualquer carta 
 print('\nO jogo inicia agora')
 
 print('\nO estado atual do baralho é: ')
+baralho = funções.cria_baralho()
+random.shuffle(baralho)
+contador = 1
+for i in baralho:
+    print('{}. {}'.format(contador, i))
+    contador +=1

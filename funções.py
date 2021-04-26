@@ -51,3 +51,18 @@ def extrai_valor(carta):
         return 'J'
     else:
         return 'A'
+
+def lista_movimentos_possiveis(cartas, indice):
+    mov_possi = []
+    if indice == 0:
+        return mov_possi
+
+    if extrai_naipe(cartas[indice-1]) in cartas[indice] or extrai_valor(cartas[indice-1]) in cartas[indice]:
+        mov_possi.append(1)
+
+
+    if indice > 2:
+        if extrai_naipe(cartas[indice-3]) in cartas[indice] or extrai_valor(cartas[indice-3]) in cartas[indice]:
+            mov_possi.append(3)
+
+    return mov_possi

@@ -19,6 +19,7 @@ print('\nDesde que alguma das condições acima seja satisfeita, qualquer carta 
 
 print('\nO jogo inicia agora')
 
+
 print('\nO estado atual do baralho é: ')
 baralho = funções.cria_baralho()
 random.shuffle(baralho)
@@ -26,3 +27,8 @@ contador = 1
 for i in baralho:
     print('{}. {}'.format(contador, i))
     contador +=1
+escolha = int(input('Digite um número entre 1 e {}: '.format(len(baralho))))
+
+mov_possivel = funções.lista_movimentos_possiveis(baralho, escolha-1)
+if mov_possivel == []:
+    escolha = int(input('A carta {} não possue nenhum movimento possível. Por favor, digite outro número entre 1 e {}: '.format(baralho[escolha - 1], len(baralho))))

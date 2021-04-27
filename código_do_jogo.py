@@ -19,41 +19,61 @@ print('\nDesde que alguma das condições acima seja satisfeita, qualquer carta 
 
 print('\nO jogo inicia agora')
 
+repetir = True
 continuar = True
-while continuar:
-    print('\nO estado atual do baralho é: ')
+while repetir:
     baralho = funções.cria_baralho()
     random.shuffle(baralho)
-    contador = 1
-    for i in baralho:
-        print('{}. {}'.format(contador, i))
-        contador +=1
-    escolha = int(input('Digite um número entre 1 e {}: '.format(len(baralho))))
 
-    while escolha < 1 or escolha > len(baralho):
-        escolha = int(input('Digite um número válido: '))
-
-    mov_possivel = funções.lista_movimentos_possiveis(baralho, escolha-1)
-    if mov_possivel == []:
-        escolha = int(input('A carta {} não possue nenhum movimento possível. Por favor, digite outro número entre 1 e {}: '.format(baralho[escolha - 1], len(baralho))))
-
-    elif mov_possivel == [1]:
-        baralho = funções.empilha(baralho, escolha-1, escolha-2)
+    while continuar:
+        print('\nO estado atual do baralho é: ')
         contador = 1
         for i in baralho:
-            print('{}. {}'.format(contador, i))
+            if '♠' in i:
+                print('\033[34m'+'{}. {}'.format(contador, i)+'\033[0;0m')
+            elif '♥' in i:
+                print('\033[31m'+'{}. {}'.format(contador, i)+'\033[0;0m')
+            elif '♦' in i:
+                print('\033[33m'+'{}. {}'.format(contador, i)+'\033[0;0m')
+            else:
+                print('\033[32m'+'{}. {}'.format(contador, i)+'\033[0;0m')
             contador +=1
+        escolha = int(input('Digite um número entre 1 e {}: '.format(len(baralho))))
 
-    elif mov_possivel == [3]:
-        baralho = funções.empilha(baralho, escolha-1, escolha-4)
-        contador = 1
-        for i in baralho:
-            print('{}. {}'.format(contador, i))
-            contador +=1
+        while escolha < 1 or escolha > len(baralho):
+            escolha = int(input('Digite um número válido: '))
 
-    else:
-        escolha = int(input('A carta {} possue dois movimentos possíveis. Por favor, escolha qual o seu destino, {}.({}) ou {}.({}): '.format(baralho[escolha - 1], escolha-1, baralho[escolha-2], escolha-3, baralho[escolha-4])))
-  
-    if funções.possui_movimentos_possiveis(baralho) == False:
-        continuar = False
-        print('O jogo acabou')
+        mov_possivel = funções.lista_movimentos_possiveis(baralho, escolha-1)
+        verificador1 = escolha -1
+        verificador2 = escolha -2
+        x =0
+        if mov_possivel == []:
+            escolha = int(input('A carta {} não possue nenhum movimento possível. Por favor, digite outro número entre 1 e {}: '.format(baralho[escolha - 1], len(baralho))))
+
+        elif mov_possivel == [1]:
+            baralho = funções.empilha(baralho, escolha-1, escolha-2)
+
+        elif mov_possivel == [3]:
+            baralho = funções.empilha(baralho, escolha-1, escolha-4)
+
+        elif mov_possivel == [1,3]:
+            while x != verificador1 or x != verificador2:
+                x = int(input('A carta {} possue dois movimentos possíveis. Por favor, escolha qual o seu destino, {}.({}) ou {}.({}): '.format(baralho[escolha - 1], escolha-1, baralho[escolha-2], escolha-3, baralho[escolha-4])))
+
+                if x == escolha-1:
+                    baralho = funções.empilha(baralho, escolha-1, escolha-2)
+                elif x == escolha-3:
+                    baralho = funções.empilha(baralho, escolha-1, escolha-4)
+                escolha = x
+
+
+    
+        if funções.possui_movimentos_possiveis(baralho) == False:
+            continuar = False
+            if len(baralho) == 1:
+                print('O jogo acabou e você ganhou, parabéns')
+            else:
+                print('O jogo acabou e você perdeu, parabéns')
+    decisao = str(input('Você quer continuar, sim ou não?'))
+    if decisao == 'não':
+        repetir = False

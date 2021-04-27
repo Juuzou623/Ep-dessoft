@@ -32,3 +32,20 @@ escolha = int(input('Digite um número entre 1 e {}: '.format(len(baralho))))
 mov_possivel = funções.lista_movimentos_possiveis(baralho, escolha-1)
 if mov_possivel == []:
     escolha = int(input('A carta {} não possue nenhum movimento possível. Por favor, digite outro número entre 1 e {}: '.format(baralho[escolha - 1], len(baralho))))
+
+elif mov_possivel == [1]:
+    baralho = funções.empilha(baralho, escolha-1, escolha-2)
+    contador = 1
+    for i in baralho:
+        print('{}. {}'.format(contador, i))
+        contador +=1
+
+elif mov_possivel == [3]:
+    baralho = funções.empilha(baralho, escolha-1, escolha-4)
+    contador = 1
+    for i in baralho:
+        print('{}. {}'.format(contador, i))
+        contador +=1
+
+else:
+    escolha = int(input('A carta {} possue dois movimentos possíveis. Por favor, escolha qual o seu destino, {}.({}) ou {}.({}): '.format(baralho[escolha - 1], escolha-1, baralho[escolha-2], escolha-3, baralho[escolha-4])))

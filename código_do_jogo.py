@@ -46,10 +46,11 @@ while repetir:
         mov_possivel = funções.lista_movimentos_possiveis(baralho, escolha-1)
         verificador1 = True
         x =0
-        if mov_possivel == []:
+        while mov_possivel == []:
             escolha = int(input('A carta {} não possue nenhum movimento possível. Por favor, digite outro número entre 1 e {}: '.format(baralho[escolha - 1], len(baralho))))
+            mov_possivel = funções.lista_movimentos_possiveis(baralho, escolha-1)
 
-        elif mov_possivel == [1]:
+        if mov_possivel == [1]:
             baralho = funções.empilha(baralho, escolha-1, escolha-2)
 
         elif mov_possivel == [3]:

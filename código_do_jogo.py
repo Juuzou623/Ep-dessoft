@@ -48,7 +48,7 @@ while repetir:
         verificador1 = True
         x =0
         while mov_possivel == []:
-            escolha = int(input('A carta {} não possue nenhum movimento possível. Por favor, digite outro número entre 1 e {}: '.format(baralho[escolha - 1], len(baralho))))
+            escolha = int(input('A carta {} não possue nenhum movimento possível. Por favor, digite outro número entre 1 e {}: '.format('\033[35m'+baralho[escolha - 1]+'\033[0;0m', len(baralho))))
             mov_possivel = funções.lista_movimentos_possiveis(baralho, escolha-1)
 
         if mov_possivel == [1]:
@@ -58,9 +58,8 @@ while repetir:
             baralho = funções.empilha(baralho, escolha-1, escolha-4)
 
         else:
+            x = int(input('A carta {} possue dois movimentos possíveis. Por favor, escolha qual o seu destino, {}.({}) ou {}.({}): '.format('\033[35m'+baralho[escolha-1]+'\033[0;0m', escolha-1, '\033[35m'+baralho[escolha-2]+'\033[0;0m', escolha-3, '\033[35m'+baralho[escolha-4]+'\033[0;0m')))
             while verificador1:
-                x = int(input('A carta {} possue dois movimentos possíveis. Por favor, escolha qual o seu destino, {}.({}) ou {}.({}): '.format(baralho[escolha - 1], escolha-1, baralho[escolha-2], escolha-3, baralho[escolha-4])))
-
                 if x == escolha-1:
                     baralho = funções.empilha(baralho, escolha-1, escolha-2)
                     escolha = x
@@ -69,9 +68,9 @@ while repetir:
                     baralho = funções.empilha(baralho, escolha-1, escolha-4)
                     escolha = x
                     verificador1 = False
+                else:
+                    x = int(input('Por favor digite um destino válido, {}.({}) ou {}.({}): '.format(escolha-1, '\033[35m'+baralho[escolha-2]+'\033[0;0m', escolha-3, '\033[35m'+baralho[escolha-4]+'\033[0;0m')))
 
-
-    
         if funções.possui_movimentos_possiveis(baralho) == False:
             continuar = False
             if len(baralho) == 1:

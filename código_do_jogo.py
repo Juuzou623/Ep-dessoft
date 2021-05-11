@@ -24,6 +24,7 @@ continuar = True
 while repetir:
     baralho = funções.cria_baralho()
     random.shuffle(baralho)
+    continuar = True
 
     while continuar:
         print('\nO estado atual do baralho é: ')
